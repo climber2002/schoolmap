@@ -11,11 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609034554) do
+ActiveRecord::Schema.define(version: 20140609035643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "cities", force: true do |t|
+    t.string   "name",                                                      null: false
+    t.integer  "province_id",                                               null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.spatial  "geom",        limit: {:srid=>4326, :type=>"multi_polygon"}
+  end
+
+  add_index "cities", ["geom"], :name => "index_cities_on_geom", :spatial => true
 
   create_table "countries", force: true do |t|
     t.string   "name"
