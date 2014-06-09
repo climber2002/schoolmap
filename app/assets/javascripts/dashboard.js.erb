@@ -2,8 +2,8 @@
 function setMapSize() {
   var totalWidth = $(window).width();
   var totalHeight = $(window).height();
-  $("#map").width(totalWidth - $("#left-panel").width());
-  $("#map").height(totalHeight - $("#header").height());
+  $("#map").width(totalWidth - $("#left-panel").outerWidth());
+  $("#map").height(totalHeight - $("#header").outerHeight());
 }
 
 $(document).ready(function() {
