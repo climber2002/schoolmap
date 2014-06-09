@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  */
 
 @import 'bootstrap';
@@ -20,6 +21,8 @@
 body {
   background-image: asset-url("mybg.png");
 }
+
+
 
 /* header */
 #header {
@@ -30,10 +33,18 @@ body {
   padding: 0 13px 0 0;
   background-color: #2C3742;
   background-repeat: repeat-x;
+
+  .vcenter {
+    float:none;
+    display:inline-block;
+    vertical-align:middle;
+    margin-right:-4px;
+    margin-top: 14px;
+}
 }
 
 #logo {
-  width: 175px;
+  width: 145px;
   margin-top: 13px;
   margin-left: 9px;
 
@@ -69,7 +80,11 @@ body {
   display: block;
   margin-left: 250px;
   padding: 0;
-  min-height: 1500px;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
 }
 
 /* info-box in google map */

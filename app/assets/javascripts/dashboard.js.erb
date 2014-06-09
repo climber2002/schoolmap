@@ -1,18 +1,41 @@
-//Set the map size
-function setMapSize() {
+//Set the main size
+function setMainSize() {
   var totalWidth = $(window).width();
   var totalHeight = $(window).height();
-  $("#map").width(totalWidth - $("#left-panel").outerWidth());
-  $("#map").height(totalHeight - $("#header").outerHeight());
+
+  $("#main").width(totalWidth - $("#left-panel").outerWidth() - 
+          $("#left-panel").offset().left - $("#main").css("margin-left"));
+  
+  $("#main").height(totalHeight - $("#header").outerHeight());
+  $("#left-panel").height(totalHeight - $("#header").outerHeight());
+
+  if(map) {
+    google.maps.event.trigger(map, 'resize');  
+  }
+  
 }
 
 $(document).ready(function() {
-  setMapSize();
+  setMainSize();
   initMap();
-});
 
-$(window).resize(function() {
-  setMapSize();
+  $(window).resize(function() {
+    setMainSize();
+  });
+
+  // HIDE MENU
+  $('#hide-menu >:first-child > a').click(function(e) {
+    $('body').toggleClass("hidden-menu");
+
+    //There is an issue that after toggle class, the width of #left-panel 
+    //doesn't change immediately, so set a timeout to set the main size.
+    //This should be able to solved by an event (TODO)
+    setTimeout(function() {
+      setMainSize();
+    }, 300);
+    e.preventDefault();
+
+  });
 });
 
 var map;

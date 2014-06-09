@@ -36,6 +36,8 @@ gem 'rgeo-geojson'
 
 gem 'annotate', group: :development
 
+gem 'font-awesome-sass'
+
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.0'
   gem 'factory_girl_rails', '~> 4.2.1'
