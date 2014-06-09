@@ -1,0 +1,137 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import 'bootstrap';
+
+/* body */
+body {
+  background-image: asset-url("mybg.png");
+}
+
+/* header */
+#header {
+  display: block;
+  height: 49px;
+  position: relative;
+  margin: 0;
+  padding: 0 13px 0 0;
+  background-color: #2C3742;
+  background-repeat: repeat-x;
+}
+
+#logo {
+  width: 175px;
+  margin-top: 13px;
+  margin-left: 9px;
+
+  img {
+    width: 123px;
+    height: auto;
+    padding-left: 3px;
+  }
+}
+
+.logo-group > span {
+  display: inline-block;
+  height: 39px;
+  float: left;
+}
+
+/* left panel */
+#left-panel {
+  position: absolute;
+  top: 49px;
+  left: 0;
+  z-index: 1002;
+  width: 250px;
+  display: block;
+  overflow: hidden;
+  background: linear-gradient(to right,#F7F7F7 99%,#CACACA 100%);
+  padding: 0 5px;
+}
+
+/* main */
+#main {
+  transition: all .1s ease-out;
+  display: block;
+  margin-left: 250px;
+  padding: 0;
+  min-height: 1500px;
+}
+
+/* info-box in google map */
+#info-box {
+  background-color: white;
+  height: 35px;
+  width: 200px;
+  text-align: center;
+  overflow: hidden;
+  border: 1px solid grey;
+  min-height: 5px;
+  display: inline-block;
+  font-size: 25px;
+}
+
+
+/* form */
+.smartform {
+
+  font-size: 13px;
+
+  
+
+  .checkbox {
+    min-height: 24px;
+    margin-bottom: 0px;
+    line-height: 15px;
+
+    label {
+      vertical-align: middle;
+      padding-left: 0px;
+
+      input {
+        margin: 1px 2px;
+        vertical-align: middle;
+               
+      }
+    }
+  }
+
+  .form-group-container {
+    margin-bottom: 15px;
+  }
+
+  header {
+    display: block;
+    padding: 8px 0 4px 0;
+    border-bottom: 1px dashed rgba(0,0,0,.2);
+    font-size: 16px;
+    font-weight: bold;
+    color: #232323;  
+  }
+
+
+
+  .form-group {
+    margin: 5px 5px 0;
+
+    .radio, .checkbox {
+      margin-top: 5px;
+      margin-bottom: 0;
+    }
+  }
+  
+}

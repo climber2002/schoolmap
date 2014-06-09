@@ -4,11 +4,75 @@
   <title>Schoolmap</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDB06c3JC9Puup5N4gk3cK1j9sQ0kO615U&sensor=false"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<header id="header">
+  <div class="logo-group">
+    <span id="logo"><%= image_tag 'logo.png' -%></span>
+    
+  </div>
+</header>
+
+<aside id="left-panel" style="min-height: 1619px">
+  <form class="smartform">
+    <div class="form-group-container">
+      <header>1er degré</header>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Ecole d'application du premier degré
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Ecole maternelle
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Ecole élémentaire
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Ecole du premier degré spécialisée
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group-container">
+      <header>2nd degré</header>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Collège
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Lycée général et technologique
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Lycée polyvalent
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Lycée technique
+        </label>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-sm">Search</button>
+  </form>
+</aside>
+
+<div id="main" role="main">
+  <%= yield %>
+</div>
 
 </body>
 </html>
