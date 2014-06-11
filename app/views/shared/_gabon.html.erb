@@ -1,0 +1,31 @@
+<script type="text/javascript">
+//This is area of the whole world
+  var everythingElse = [
+    new google.maps.LatLng(-180, -90),
+    new google.maps.LatLng(-180, 90),
+    new google.maps.LatLng(180, 90),
+    new google.maps.LatLng(180, -90)
+  ];
+
+  var gabonArea = [everythingElse];
+
+ $(document).ready(function() {
+  
+
+  <% @country.geom.each do |polygon| %>
+    gabonArea.push(<%= polygon_to_gmap_points_array polygon -%>);
+  <% end %>
+
+  
+  gabonHighlighted = new google.maps.Polygon({
+    paths: gabonArea,
+    strokeColor: "#000000",
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: "#000000",
+    fillOpacity: 1
+  });
+
+  gabonHighlighted.setMap(map);
+ });
+</script>

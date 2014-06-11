@@ -52,9 +52,6 @@ function initMap() {
   map = new google.maps.Map(mapElement, mapOptions);
   map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
 
-  //Load GeoJSON
-  map.data.loadGeoJson("<%= Rails.application.routes.url_helpers.provinces_path format: :json %>");
-
   //Set center to garbon
   var gabon = new google.maps.LatLng(1.000000, 11.45000000);
   map.setCenter(gabon);
@@ -63,6 +60,13 @@ function initMap() {
   var infoBox = document.createElement('div');
   infoBox.innerHTML = "<div id='info-box'>Info</div>";
   map.controls[google.maps.ControlPosition.RIGHT_TOP].push(infoBox);
+
+
+  //Add an inverse polygon to dark the area that are outside of gabon
+
+
+  //Load GeoJSON
+  map.data.loadGeoJson("<%= Rails.application.routes.url_helpers.provinces_path format: :json %>");
 
   map.data.addListener('mouseover', function(event) {
     map.data.revertStyle();
@@ -80,4 +84,5 @@ function initMap() {
     return { fillColor: 'green',
             strokeWeight: 1}
   });
+
 }
