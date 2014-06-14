@@ -1,16 +1,17 @@
 <script type="text/javascript">
-//This is area of the whole world
-  var everythingElse = [
+
+
+ $(document).ready(function() {
+
+  //This is area of the whole world
+  var wholeWorld = [
     new google.maps.LatLng(-180, -90),
     new google.maps.LatLng(-180, 90),
     new google.maps.LatLng(180, 90),
     new google.maps.LatLng(180, -90)
   ];
 
-  var gabonArea = [everythingElse];
-
- $(document).ready(function() {
-  
+  var gabonArea = [wholeWorld];
 
   <% @country.geom.each do |polygon| %>
     gabonArea.push(<%= polygon_to_gmap_points_array polygon -%>);
