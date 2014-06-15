@@ -10,13 +10,12 @@ module Featurable
 
         property_names = Array(property_names)
         properties = property_names.inject({}) do |hash, property_name| 
-          hash[property_name.to_sym] = read_attribute(property_name)
+          hash[property_name.to_sym] = public_send(property_name)
           hash
         end
         factory.feature read_attribute(geom_attr_name), self.id, properties
       end
     end
-
 
     # turns a collection of models to a feature collection
     # All models in the collection should implement the to_feature method
