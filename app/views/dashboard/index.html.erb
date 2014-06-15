@@ -3,5 +3,33 @@
 </div>
 
 <script type="text/javascript">
-  $.getScript("<%= root_path format: :js -%>");
+$(document).ready(function(){
+  if(gabonPolygon === undefined) {  
+    //This is area of the whole world
+    var wholeWorld = [
+      new google.maps.LatLng(-180, -90),
+      new google.maps.LatLng(-180, 90),
+      new google.maps.LatLng(180, 90),
+      new google.maps.LatLng(180, -90)
+    ];
+
+    var gabonArea = [wholeWorld];
+
+    <% @country.geom.each do |polygon| %>
+      gabonArea.push(<%= polygon_to_gmap_points_array polygon -%>);
+    <% end %>
+
+    gabonPolygon = new google.maps.Polygon({
+      paths: gabonArea,
+      strokeColor: "#000000",
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: "#ffffff",
+      fillOpacity: 1
+    });
+  }
+});
+
+
+$.getScript("<%= root_path format: :js -%>");
 </script>

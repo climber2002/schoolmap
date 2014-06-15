@@ -1,40 +1,16 @@
 (function() {
 
-  //This is area of the whole world
-  var wholeWorld = [
-    new google.maps.LatLng(-180, -90),
-    new google.maps.LatLng(-180, 90),
-    new google.maps.LatLng(180, 90),
-    new google.maps.LatLng(180, -90)
-  ];
-
-  var gabonArea = [wholeWorld];
-
-  <% @country.geom.each do |polygon| %>
-    gabonArea.push(<%= polygon_to_gmap_points_array polygon -%>);
-  <% end %>
-
-  if(highlightedPolygon) {
+  if(highlightedPolygon !== undefined) {
     highlightedPolygon.setMap(null);
   }
   
-  highlightedPolygon = new google.maps.Polygon({
-    paths: gabonArea,
-    strokeColor: "#000000",
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: "#ffffff",
-    fillOpacity: 1
-  });
-
+  highlightedPolygon = gabonPolygon;
   highlightedPolygon.setMap(map);
 
   //Load GeoJSON of provinces
   if(provincesData === undefined) {
     provincesData = new google.maps.Data();
-    $.getJSON("<%= provinces_path format: :json %>", function(data) {
-      provincesData.addGeoJson(data);
-    });
+    provincesData.loadGeoJson("<%= provinces_path format: :json %>");
     
     provincesData.addListener('mouseover', function(event) {
       provincesData.revertStyle();
