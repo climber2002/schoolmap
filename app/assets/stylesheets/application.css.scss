@@ -40,7 +40,7 @@ body {
     vertical-align:middle;
     margin-right:-4px;
     margin-top: 14px;
-}
+  }
 }
 
 #logo {
@@ -72,6 +72,19 @@ body {
   overflow: hidden;
   background: linear-gradient(to right,#F7F7F7 99%,#CACACA 100%);
   padding: 0 5px;
+}
+
+/* the breadcrumb */
+#ribbon {
+  background: #fff;
+  min-height: 35px;
+  padding: 0 13px;
+  position: relative;
+
+  .breadcrumb {
+    margin-bottom: 0px;
+    background-color: #fff;
+  }
 }
 
 /* main */

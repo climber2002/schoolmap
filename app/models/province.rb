@@ -5,5 +5,5 @@ class Province < ActiveRecord::Base
   has_many :cities
 
   include Featurable
-  featurable :geom, [:name]
+  featurable :geom, [:name, :id]
 end
