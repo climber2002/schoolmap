@@ -1,5 +1,12 @@
-<div id="ribbon">
+
   <ol class="breadcrumb">
-    <li><%= link_to 'Home', root_path(format: :js), remote: true -%></li>
+    <% @breadcrumb.each_with_index do |breadcrumb, index| -%>
+      <% li_options = {} %>
+      <% li_options[:class] = 'active' if index == (@breadcrumb.size - 1) %>
+      <% if breadcrumb[:url] -%>
+        <%= content_tag :li, link_to(breadcrumb[:text], breadcrumb[:url], breadcrumb[:html_options]), li_options -%>
+      <% else %>
+        <%= content_tag :li, breadcrumb[:text], li_options -%>
+      <% end -%>
+    <% end -%>
   </ol>
-</div>

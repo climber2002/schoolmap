@@ -18,12 +18,15 @@ function setMainSize() {
 // This is the google map object and it's global
 var map;
 // This is the highlighted area, and the other area will be dark
-var highlightedPolygon;
-// The provincesData contains all provinces
-var provincesData;
+var currentAreaPolygon;
+// This is current data
+var currentData;
 
 // This is a polygon represents gabon
 var gabonPolygon;
+
+// The provincesData contains all provinces
+var provincesData;
 
 $(document).ready(function() {
   setMainSize();

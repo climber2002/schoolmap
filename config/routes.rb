@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   root 'dashboard#index'
 
-  resources :provinces
+  resources :provinces do
+    resources :cities
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

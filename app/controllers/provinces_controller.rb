@@ -13,6 +13,8 @@ class ProvincesController < ApplicationController
 
   def show
     @province = Province.find params[:id]
+    add_breadcrumb @province.name, province_path(@province, format: :js)
+
     respond_to do |format|
       format.js
     end

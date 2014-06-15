@@ -1,9 +1,12 @@
 <%# encoding: utf-8 %>
 <%# Clear the original highlighted area %>
-highlightedPolygon.setMap(null);
+currentAreaPolygon.setMap(null);
 
 
 (function() {
+
+  <%# update breadcrumb -%>
+  $("#ribbon").html("<%= escape_javascript(render partial: 'shared/breadcrumb') %>")
 
   <%# set highlighted area only to the selected province -%>
   var wholeWorld = [
@@ -14,8 +17,8 @@ highlightedPolygon.setMap(null);
   ];
 
   <%# hide provinces data -%>
-  if(provincesData) {
-    provincesData.setMap(null);
+  if(currentData !== undefined) {
+    currentData.setMap(null);
   }
 
   var provinceArea = [wholeWorld];
@@ -25,7 +28,7 @@ highlightedPolygon.setMap(null);
   <% end %>
 
 
-  highlightedPolygon = new google.maps.Polygon({
+  currentAreaPolygon = new google.maps.Polygon({
     paths: provinceArea,
     strokeColor: "#000000",
     strokeOpacity: 0.8,
@@ -33,8 +36,33 @@ highlightedPolygon.setMap(null);
     fillColor: "#ffffff",
     fillOpacity: 1
   });
+  currentAreaPolygon.setMap(map);
 
-  highlightedPolygon.setMap(map);
+    currentData = new google.maps.Data();
+    currentData.loadGeoJson("<%= province_cities_path @province, format: :json %>");
+    
+    currentData.addListener('mouseover', function(event) {
+      currentData.revertStyle();
+      $('#info-box').text(event.feature.getProperty('name'));
+      currentData.overrideStyle(event.feature, { fillColor: 'red' });
+    });
+
+    currentData.addListener('mouseout', function(event){
+      currentData.revertStyle();
+    });
+
+    currentData.addListener('click', function(event) {
+      provinceId = event.feature.getProperty('province_id');
+      id = event.feature.getProperty('id');
+      console.log("click province id " + provinceId + " city id " + id);
+      $.getScript("/provinces/" + provinceId + "/" + id + ".js");
+    });    
+
+    currentData.setStyle(function(feature) {
+      return { fillColor: 'green',
+              strokeWeight: 1};
+    });
+    currentData.setMap(map);
 
 })();
 

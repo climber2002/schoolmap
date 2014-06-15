@@ -28,6 +28,34 @@ $(document).ready(function(){
       fillOpacity: 1
     });
   }
+
+  //Load GeoJSON of provinces
+  if(provincesData === undefined) {
+    provincesData = new google.maps.Data();
+    provincesData.loadGeoJson("<%= provinces_path format: :json %>");
+    
+    provincesData.addListener('mouseover', function(event) {
+      provincesData.revertStyle();
+      $('#info-box').text(event.feature.getProperty('name'));
+      provincesData.overrideStyle(event.feature, { fillColor: 'red' });
+    });
+
+    provincesData.addListener('mouseout', function(event){
+      provincesData.revertStyle();
+    });
+
+    provincesData.addListener('click', function(event) {
+      provinceId = event.feature.getProperty('id');
+      console.log("click province id " + provinceId);
+      $.getScript("/provinces/" + provinceId + ".js");
+    });    
+
+    provincesData.setStyle(function(feature) {
+      return { fillColor: 'green',
+              strokeWeight: 1};
+    });
+  }
+  
 });
 
 
