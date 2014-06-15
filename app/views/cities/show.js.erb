@@ -1,0 +1,43 @@
+<%# encoding: utf-8 %>
+
+(function() {
+
+  <%# update breadcrumb -%>
+  $("#ribbon").html("<%= escape_javascript(render partial: 'shared/breadcrumb') %>")
+
+  <%# Clear the original highlighted area %>
+  if(currentAreaPolygon !== undefined) {
+    currentAreaPolygon.setMap(null);
+  }
+  <%# hide provinces data -%>
+  if(currentData !== undefined) {
+    currentData.setMap(null);
+  }
+
+  <%# set highlighted area only to the selected province -%>
+  var wholeWorld = [
+    new google.maps.LatLng(-180, -90),
+    new google.maps.LatLng(-180, 90),
+    new google.maps.LatLng(180, 90),
+    new google.maps.LatLng(180, -90)
+  ];
+
+  var cityArea = [wholeWorld];
+
+  <% @city.geom.each do |polygon| %>
+    cityArea.push(<%= polygon_to_gmap_points_array polygon -%>);
+  <% end %>
+
+
+  currentAreaPolygon = new google.maps.Polygon({
+    paths: cityArea,
+    strokeColor: "#000000",
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: "#ffffff",
+    fillOpacity: 1
+  });
+  currentAreaPolygon.setMap(map);
+
+
+})();

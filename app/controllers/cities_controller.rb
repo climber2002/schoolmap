@@ -12,4 +12,15 @@ class CitiesController < ApplicationController
     end  
   end
 
+  def show
+    @province = Province.find params[:province_id]
+    @city = @province.cities.find params[:id]
+    add_breadcrumb @province.name, province_path(@province, format: :js)
+    add_breadcrumb @city.name, province_city_path(@province, @city, format: :js)
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
 end

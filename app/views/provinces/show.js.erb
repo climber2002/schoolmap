@@ -1,12 +1,12 @@
 <%# encoding: utf-8 %>
-<%# Clear the original highlighted area %>
-currentAreaPolygon.setMap(null);
-
 
 (function() {
 
   <%# update breadcrumb -%>
   $("#ribbon").html("<%= escape_javascript(render partial: 'shared/breadcrumb') %>")
+
+  <%# Clear the original highlighted area %>
+  currentAreaPolygon.setMap(null);
 
   <%# set highlighted area only to the selected province -%>
   var wholeWorld = [
@@ -55,7 +55,7 @@ currentAreaPolygon.setMap(null);
       provinceId = event.feature.getProperty('province_id');
       id = event.feature.getProperty('id');
       console.log("click province id " + provinceId + " city id " + id);
-      $.getScript("/provinces/" + provinceId + "/" + id + ".js");
+      $.getScript("/provinces/" + provinceId + "/cities/" + id + ".js");
     });    
 
     currentData.setStyle(function(feature) {
