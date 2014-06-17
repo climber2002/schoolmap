@@ -39,5 +39,8 @@
   });
   currentAreaPolygon.setMap(map);
 
+  var center = new google.maps.LatLng(<%= @city.center_point.y -%>, <%= @city.center_point.x -%>);
+  map.setCenter(center);
+  map.set('zoom', 9);
 
 })();

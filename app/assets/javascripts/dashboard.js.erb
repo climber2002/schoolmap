@@ -6,7 +6,7 @@ function setMainSize() {
   $("#main").width(totalWidth - $("#left-panel").outerWidth() - 
           $("#left-panel").offset().left - $("#main").css("margin-left"));
   
-  $("#main").height(totalHeight - $("#header").outerHeight());
+  $("#main").height(totalHeight - $("#header").outerHeight() - $("#ribbon").outerHeight());
   $("#left-panel").height(totalHeight - $("#header").outerHeight());
 
   if(map) {
@@ -65,14 +65,41 @@ function initMap() {
   map = new google.maps.Map(mapElement, mapOptions);
   map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
 
+  // hide most features
+  map.set('styles', [
+      {
+        featureType: 'road.highway',
+        stylers: [ { visibility: 'off' } ]
+      }, 
+      {
+        featureType: 'water',
+        stylers: [ { visibility: 'off' } ]
+      },
+      {
+        featureType: 'administrative.country',
+        stylers: [ { visibility: 'off' } ]
+      },
+      {
+        featureType: 'administrative.province',
+        stylers: [ { visibility: 'off' } ]
+      },
+      {
+        featureType: 'poi.park',
+        stylers: [ { visibility: 'off' } ]
+      },
+      {
+        featureType: 'poi.school',
+        stylers: [ { visibility: 'off' } ]
+      }
+    ])
+
   //Set center to garbon
-  var gabon = new google.maps.LatLng(1.000000, 11.45000000);
+  var gabon = new google.maps.LatLng(-0.6225172457730085, 11.785067468340143);
   map.setCenter(gabon);
 
   //Create an info box for displaying names
   var infoBox = document.createElement('div');
   infoBox.innerHTML = "<div id='info-box'>Info</div>";
   map.controls[google.maps.ControlPosition.RIGHT_TOP].push(infoBox);
-
 
 }

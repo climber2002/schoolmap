@@ -64,6 +64,10 @@
     });
     currentData.setMap(map);
 
+    var center = new google.maps.LatLng(<%= @province.center_point.y -%>, <%= @province.center_point.x -%>);
+    map.setCenter(center);
+    map.set('zoom', 8);
+
 })();
 
 

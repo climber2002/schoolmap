@@ -1,5 +1,8 @@
 (function() {
 
+  <%# update breadcrumb -%>
+  $("#ribbon").html("<%= escape_javascript(render partial: 'shared/breadcrumb') %>")
+
   if(currentAreaPolygon !== undefined) {
     currentAreaPolygon.setMap(null);
   }
@@ -12,4 +15,9 @@
   currentData = provincesData;
   currentData.setMap(map);
   
+  //Set center to garbon
+  var gabon = new google.maps.LatLng(-0.6225172457730085, 11.785067468340143);
+  map.setCenter(gabon);
+
+  map.set('zoom', 7);
  })();
