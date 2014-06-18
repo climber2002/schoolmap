@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609035643) do
+ActiveRecord::Schema.define(version: 20140617134318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,13 @@ ActiveRecord::Schema.define(version: 20140609035643) do
 
   add_index "countries", ["geom"], :name => "index_countries_on_geom", :spatial => true
 
+  create_table "grades", force: true do |t|
+    t.string   "name",        null: false
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "provinces", force: true do |t|
     t.string   "name",                                                     null: false
     t.datetime "created_at"
@@ -45,5 +52,19 @@ ActiveRecord::Schema.define(version: 20140609035643) do
   end
 
   add_index "provinces", ["geom"], :name => "index_provinces_on_geom", :spatial => true
+
+  create_table "schools", force: true do |t|
+    t.string   "name",                                              null: false
+    t.string   "street"
+    t.string   "director"
+    t.string   "website"
+    t.string   "phonenumber"
+    t.integer  "city_id"
+    t.integer  "province_id"
+    t.integer  "grade_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.spatial  "geom",        limit: {:srid=>4326, :type=>"point"}
+  end
 
 end
