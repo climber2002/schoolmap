@@ -7,6 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # for Countries
+City.delete_all
+Province.delete_all
+Country.delete_all
 
 if Country.all.count == 0
   connection = ActiveRecord::Base.connection()
