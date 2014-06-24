@@ -17,6 +17,13 @@ ActiveRecord::Schema.define(version: 20140617134318) do
   enable_extension "plpgsql"
   enable_extension "postgis"
 
+  create_table "categories", force: true do |t|
+    t.string   "name",        null: false
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "cities", force: true do |t|
     t.string   "name",                                                      null: false
     t.integer  "province_id",                                               null: false
@@ -38,7 +45,8 @@ ActiveRecord::Schema.define(version: 20140617134318) do
   add_index "countries", ["geom"], :name => "index_countries_on_geom", :spatial => true
 
   create_table "grades", force: true do |t|
-    t.string   "name",        null: false
+    t.string   "name",                    null: false
+    t.integer  "degree",      default: 1
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -54,17 +62,21 @@ ActiveRecord::Schema.define(version: 20140617134318) do
   add_index "provinces", ["geom"], :name => "index_provinces_on_geom", :spatial => true
 
   create_table "schools", force: true do |t|
-    t.string   "name",                                              null: false
-    t.string   "street"
+    t.string   "name",                                                           null: false
+    t.string   "address"
+    t.string   "zipcode"
     t.string   "director"
     t.string   "website"
-    t.string   "phonenumber"
+    t.string   "phone_number"
+    t.string   "email"
     t.integer  "city_id"
     t.integer  "province_id"
     t.integer  "grade_id"
+    t.integer  "category_id"
+    t.integer  "capacity",                                           default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.spatial  "geom",        limit: {:srid=>4326, :type=>"point"}
+    t.spatial  "geom",         limit: {:srid=>4326, :type=>"point"}
   end
 
 end

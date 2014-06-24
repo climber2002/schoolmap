@@ -50,10 +50,15 @@ if City.all.count == 0
   connection.execute "drop table cities_ref"
 end
 
-# for grades
-if Grade.all.count == 0
-  Grade.create!(name: 'pre-scolaire')
-  Grade.create!(name: 'primaire')
-  Grade.create!(name: 'college')
-  Grade.create!(name: 'lycee')
-end
+# Grade
+Grade.delete_all
+Grade.create!(name: 'pmaternelle', degree: 1)
+Grade.create!(name: 'primaire', degree: 1)
+Grade.create!(name: 'college', degree: 2)
+Grade.create!(name: 'lycee', degree: 2)
+
+# Category
+Category.delete_all
+Category.create!(name: 'publique')
+Category.create!(name: 'privee')
+Category.create!(name: 'confessionnelle')

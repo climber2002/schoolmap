@@ -11,4 +11,6 @@ class School < ActiveRecord::Base
   belongs_to :grade
   validates :grade, presence: true
 
+  belongs_to :category
+  validates :category, presence: true
 end
