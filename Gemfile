@@ -44,6 +44,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'minitest'
   gem 'faker', '~> 1.1.2'
   gem 'capybara', '~> 2.2.1'
   gem 'database_cleaner', '~> 1.0.1'

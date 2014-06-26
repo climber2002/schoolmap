@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   resources :provinces do
     resources :cities
   end
+
+  resources :schools
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
