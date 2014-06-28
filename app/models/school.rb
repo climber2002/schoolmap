@@ -31,6 +31,9 @@ class School < ActiveRecord::Base
     self.city = City.find_by(name: city_name)
   end
 
+  scope :in_province, ->(province_id) { where('province_id = ?', province_id) }
+  scope :in_city, ->(city_id) { where('city_id = ?', city_id) }
+
   private
   def set_province
     self.province = self.city.province unless self.province

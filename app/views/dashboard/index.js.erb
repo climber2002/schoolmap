@@ -20,4 +20,7 @@
   map.setCenter(gabon);
 
   map.set('zoom', 7);
+
+  // Load all schools
+  $.getScript("<%= schools_path(format: :js) %>")
  })();

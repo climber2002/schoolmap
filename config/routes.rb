@@ -8,6 +8,11 @@ Rails.application.routes.draw do
 
   resources :provinces do
     resources :cities
+    resources :schools
+  end
+
+  resources :cities do
+    resources :schools
   end
 
   resources :schools

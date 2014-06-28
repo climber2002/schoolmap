@@ -48,6 +48,7 @@ $(document).ready(function(){
       provinceId = event.feature.getProperty('id');
       console.log("click province id " + provinceId);
       $.getScript("/provinces/" + provinceId + ".js");
+      $.getScript("/provinces/" + provinceId + '/schools.js');
     });    
 
     provincesData.setStyle(function(feature) {
@@ -55,7 +56,7 @@ $(document).ready(function(){
               strokeWeight: 1};
     });
   }
-  
+
 });
 
 

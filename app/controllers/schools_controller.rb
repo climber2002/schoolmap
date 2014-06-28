@@ -14,6 +14,16 @@ class SchoolsController < ApplicationController
     end  
   end
 
+  def index
+    @schools = School.all
+    @schools = @schools.in_province(params[:province_id]) if params[:province_id]
+    @schools = @schools.in_city(params[:city_id]) if params[:city_id]
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private 
 
   def school_params

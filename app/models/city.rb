@@ -9,4 +9,6 @@ class City < ActiveRecord::Base
 
   include Centerable
   has_center  
+
+  has_many :schools
 end

@@ -1,0 +1,18 @@
+(function() {
+  if(schoolMarkers.length > 0) {
+    var marker;
+    for(i = 0; i < schoolMarkers.length; i++) {
+      marker = schoolMarkers[i];
+      marker.setMap(null);
+    }
+    schoolMarkers = [];
+  }
+
+  <% @schools.each do |school| %>
+    schoolMarkers.push(new google.maps.Marker({
+      position : new google.maps.LatLng(<%= school.geom.y %>, <%= school.geom.x %>),
+      map: map
+    }));
+  <% end %>
+
+})();

@@ -53,9 +53,10 @@
 
     currentData.addListener('click', function(event) {
       provinceId = event.feature.getProperty('province_id');
-      id = event.feature.getProperty('id');
-      console.log("click province id " + provinceId + " city id " + id);
-      $.getScript("/provinces/" + provinceId + "/cities/" + id + ".js");
+      cityId = event.feature.getProperty('id');
+      console.log("click province id " + provinceId + " city id " + cityId);
+      $.getScript("/provinces/" + provinceId + "/cities/" + cityId + ".js");
+      $.getScript("/cities/" + cityId + "/schools.js");
     });    
 
     currentData.setStyle(function(feature) {
@@ -68,6 +69,8 @@
     map.setCenter(center);
     map.set('zoom', 8);
 
+    //load schools of the province
+    $.getScript("<%= province_schools_path(@province, format: :js) -%>")
 })();
 
 
