@@ -9,11 +9,12 @@
     schoolMarkers = [];
   }
 
+  <%# add schools as markers on google map %>
   <% @schools.each do |school| %>
     (function() {
       var marker = new google.maps.Marker({
                     position : new google.maps.LatLng(<%= school.geom.y %>, <%= school.geom.x %>),
-                    icon: '<%= grade_marker_for_school(school) -%>',
+                    icon: '<%= grade_marker_path_for_school(school) -%>',
                     map: map
                   });
       schoolMarkers.push(marker);
@@ -23,5 +24,17 @@
       });
     })();
   <% end %>
+
+  <%# add the grade info to the bottom left %>
+  if(! document.getElementById("grade-info")) {
+    var gradeInfo = document.createElement('div');
+    gradeInfo.innerHTML = '<%= escape_javascript(render("grade")) -%>';
+    var bottomLeft = map.controls[google.maps.ControlPosition.BOTTOM_LEFT];
+    while(bottomLeft.length > 0) {
+      bottomLeft.pop();
+    }
+
+    bottomLeft.push(gradeInfo);
+  }
 
 })();

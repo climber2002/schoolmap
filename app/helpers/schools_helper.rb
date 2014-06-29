@@ -2,26 +2,17 @@ module SchoolsHelper
 
   # returns the grade image marker for a school
   # the format of the image will be markermed_#{color}_#{char}.png
-  def grade_marker_for_school school
-    case school.grade.name.downcase
-    when "pmaternelle"
-      char = 'P'
-      color = "blue"
-    when "primaire"
-      char = "R"
-      color = "orange"
-    when "college"
-      char = "C"
-      color = "red"
-    when "lycee"
-      char = "L"
-      color = "yellow"
-    else
-      char = "U"
-      color = "black"
-    end
+  def grade_marker_path_for_school school
+    marker_img_path_for_grade school.grade
+  end
 
-    image_path("markers/markermed_#{color}_#{char}.png")
+  # returns the marker image path for the grade
+  def marker_img_path_for_grade grade
+    image_path("#{marker_img_for_grade(grade)}")
+  end
+
+  def marker_img_tag_for_grade grade
+    image_tag("#{marker_img_for_grade(grade)}")
   end
 
   # the info window content for school to display on google maps
@@ -50,4 +41,28 @@ module SchoolsHelper
     end
   end
 
+  private 
+
+  # Return the img logic path of the marker for the specific grade
+  def marker_img_for_grade grade
+    case grade.name.downcase
+    when "pmaternelle"
+      char = 'P'
+      color = "blue"
+    when "primaire"
+      char = "R"
+      color = "orange"
+    when "college"
+      char = "C"
+      color = "red"
+    when "lycee"
+      char = "L"
+      color = "yellow"
+    else
+      char = "U"
+      color = "black"
+    end
+
+    "markers/markermed_#{color}_#{char}.png"
+  end
 end

@@ -1,0 +1,8 @@
+<ul id="grade-info" class="list-group">
+  <% Grade.order('name').all.each do |grade| -%>
+    <li class="list-group-item">
+      <%= marker_img_tag_for_grade grade -%>
+      <%= grade.name -%>
+    </li>
+  <% end -%>
+</ul>

@@ -65,7 +65,8 @@ function initMap() {
   var mapOptions = {
     zoom: 7,
     mapTypeControlOptions: {mapTypeIds:
-               [google.maps.MapTypeId.ROADMAP]}
+               [google.maps.MapTypeId.ROADMAP]},
+    mapTypeControl: false
   };
 
   var mapElement = document.getElementById('map');
@@ -105,10 +106,14 @@ function initMap() {
   map.setCenter(gabon);
 
   //Create an info box for displaying names
+  createInfoBox();
+
+}
+
+function createInfoBox() {
   var infoBox = document.createElement('div');
   infoBox.innerHTML = "<div id='info-box'>Info</div>";
-  map.controls[google.maps.ControlPosition.RIGHT_TOP].push(infoBox);
-
+  map.controls[google.maps.ControlPosition.TOP_RIGHT].push(infoBox);
 }
 
 function initSchoolInfoWindow() {
