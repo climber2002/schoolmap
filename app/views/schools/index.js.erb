@@ -11,6 +11,7 @@
   <% @schools.each do |school| %>
     schoolMarkers.push(new google.maps.Marker({
       position : new google.maps.LatLng(<%= school.geom.y %>, <%= school.geom.x %>),
+      icon: '<%= grade_marker_for_school(school) -%>',
       map: map
     }));
   <% end %>
