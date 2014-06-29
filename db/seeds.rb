@@ -52,7 +52,7 @@ end
 
 # Grade
 Grade.delete_all
-Grade.create!(name: 'pmaternelle', degree: 1)
+Grade.create!(name: 'maternelle', degree: 1)
 Grade.create!(name: 'primaire', degree: 1)
 Grade.create!(name: 'college', degree: 2)
 Grade.create!(name: 'lycee', degree: 2)

@@ -46,11 +46,11 @@ module SchoolsHelper
   # Return the img logic path of the marker for the specific grade
   def marker_img_for_grade grade
     case grade.name.downcase
-    when "pmaternelle"
-      char = 'P'
+    when "maternelle"
+      char = 'M'
       color = "blue"
     when "primaire"
-      char = "R"
+      char = "P"
       color = "orange"
     when "college"
       char = "C"

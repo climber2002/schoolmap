@@ -1,6 +1,8 @@
 namespace :db do
   desc "generate school at random points"
   task :random_schools => :environment do
+    School.delete_all
+    
     cities = City.all
     cities.each do |city|
       num_of_schools = rand(10) # create at most 10 schools in each city
@@ -18,7 +20,7 @@ namespace :db do
                             category: Category.all.sample,
                             city: city
                           )
-        school.save!
+        school.save
 
         puts "Created #{num_of_schools} schools for city #{city.name}"
       end
