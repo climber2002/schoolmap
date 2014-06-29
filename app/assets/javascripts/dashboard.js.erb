@@ -31,9 +31,13 @@ var provincesData;
 // This contains the school markers in current display
 var schoolMarkers = [];
 
+// The infoWindow which displays school info
+var schoolInfowindow;
+
 $(document).ready(function() {
   setMainSize();
   initMap();
+  initSchoolInfoWindow();
 
   $(window).resize(function() {
     setMainSize();
@@ -105,4 +109,10 @@ function initMap() {
   infoBox.innerHTML = "<div id='info-box'>Info</div>";
   map.controls[google.maps.ControlPosition.RIGHT_TOP].push(infoBox);
 
+}
+
+function initSchoolInfoWindow() {
+  schoolInfoWindow = new google.maps.InfoWindow({
+      content: ""
+  })
 }

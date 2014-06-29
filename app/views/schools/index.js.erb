@@ -1,6 +1,7 @@
 (function() {
+  var marker;
+
   if(schoolMarkers.length > 0) {
-    var marker;
     for(i = 0; i < schoolMarkers.length; i++) {
       marker = schoolMarkers[i];
       marker.setMap(null);
@@ -9,11 +10,18 @@
   }
 
   <% @schools.each do |school| %>
-    schoolMarkers.push(new google.maps.Marker({
-      position : new google.maps.LatLng(<%= school.geom.y %>, <%= school.geom.x %>),
-      icon: '<%= grade_marker_for_school(school) -%>',
-      map: map
-    }));
+    (function() {
+      var marker = new google.maps.Marker({
+                    position : new google.maps.LatLng(<%= school.geom.y %>, <%= school.geom.x %>),
+                    icon: '<%= grade_marker_for_school(school) -%>',
+                    map: map
+                  });
+      schoolMarkers.push(marker);
+      google.maps.event.addListener(marker, 'click', function() {
+        schoolInfoWindow.content = '<%= info_window_content_for_school(school) -%>';
+        schoolInfoWindow.open(map, marker);
+      });
+    })();
   <% end %>
 
 })();

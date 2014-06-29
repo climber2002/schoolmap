@@ -25,4 +25,10 @@ describe School do
       expect(school.province).to eq city.province
     end
   end
+
+  context "FactoryGirl" do 
+    it "should be able to create a valid school from FactoryGirl" do
+      expect(FactoryGirl.create(:school)).to be_valid
+    end
+  end
 end
