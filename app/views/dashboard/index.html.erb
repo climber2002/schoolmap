@@ -3,7 +3,25 @@
 </div>
 
 <script type="text/javascript">
+//Init the right bottom box for bar charts, this is put here because
+//js files in assets don't support 'render'
+function initBarChartBox() {
+  <%# Add the bar chart to the bottom right %>
+  if(! document.getElementById("bar-chart-container")) {
+    var barChart = document.createElement('div');
+    barChart.id = 'bar-chart-container';
+    barChart.style.width = "330px";
+
+    barChart.innerHTML = '<%= escape_javascript(render("schools/bar_chart")) -%>';
+    var bottomRight = map.controls[google.maps.ControlPosition.RIGHT_BOTTOM];
+    bottomRight.push(barChart);
+    
+  }
+}
+
 $(document).ready(function(){
+  initBarChartBox();
+
   if(gabonPolygon === undefined) {  
     //This is area of the whole world
     var wholeWorld = [
@@ -57,8 +75,19 @@ $(document).ready(function(){
     });
   }
 
+  var _elementToFind = "bar-chart";
+  var _elementFound = false;
+  var _counter = 1;
+  $(document).bind("DOMSubtreeModified", function(evt) {
+      if (_elementFound)
+          return;
+      if ($("#" + _elementToFind).length > 0) {
+          $.getScript("<%= root_path format: :js -%>");
+          _elementFound = true;
+      }
+  });
 });
 
 
-$.getScript("<%= root_path format: :js -%>");
+
 </script>

@@ -18,7 +18,8 @@ namespace :db do
                             website: Faker::Internet.domain_name,
                             grade: Grade.all.sample,
                             category: Category.all.sample,
-                            city: city
+                            city: city,
+                            capacity: 500 + rand(10000)
                           )
         school.save
 

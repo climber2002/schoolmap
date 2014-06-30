@@ -37,4 +37,58 @@
     bottomLeft.push(gradeInfo);
   }
 
+  var schoolCountSeries = [
+    <% Category.all.order(:name).each do |category| -%>
+      {
+        data: [
+          <%= Grade.all.order(:name).each_with_index.map do |grade, i| 
+            "[#{i + 1}, #{@school_count_stats[category.name][grade.name]}]"
+          end.join(",").html_safe -%>
+        ],
+        label: "<%= escape_javascript(category.name) -%>"
+      },
+    <% end -%>
+  ];
+
+  var capacitySeries = [
+    <% Category.all.order(:name).each do |category| -%>
+      {
+        data: [
+          <%= Grade.all.order(:name).each_with_index.map do |grade, i| 
+            "[#{i + 1}, #{@capacity_stats[category.name][grade.name]}]"
+          end.join(",").html_safe -%>
+        ],
+        label: "<%= escape_javascript(category.name) -%>"
+      },
+    <% end -%>
+  ]
+
+  var options = {
+      series: {
+          bars: {
+              show: true,
+              barWidth: 0.9,
+              align: "center"
+          },
+          stack: 0,
+          lines: {show: false, steps: false }
+      },
+      xaxis: {
+          minTickSize: 1,
+          ticks: [
+            <%= Grade.all.order(:name).each_with_index.map do |grade, i| 
+                "[#{i + 1}, '#{grade.name}']"
+              end.join(",").html_safe-%>
+          ]
+      },
+      legend: {
+        show: true,
+        container: '#legend',
+        noColumns: 3
+      }
+    }
+
+  $.plot("#schools-count-canvas", schoolCountSeries, options);
+  $.plot("#capacity-canvas", capacitySeries, options);
+
 })();

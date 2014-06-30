@@ -199,3 +199,19 @@ body {
   -webkit-box-shadow: inset 0px 0px 6px 1px rgba(0, 0, 0, 0.2);
   box-shadow: inset 0px 0px 6px 1px rgba(0, 0, 0, 0.2);
 }
+
+/* bar chart */
+#bar-chart {
+  opacity: 1;
+
+  .content {
+    background-color: #ffffff;
+  }
+}
+
+/* flot */
+#legend {
+  .legendLabel {
+    padding: 0px 5px 0px 0px;
+  }
+}
