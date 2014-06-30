@@ -56,6 +56,7 @@ $(document).ready(function() {
     e.preventDefault();
 
   });
+
 });
 
 
@@ -108,6 +109,10 @@ function initMap() {
   //Create an info box for displaying names
   createInfoBox();
 
+  $(document).on('click', ".jarviswidget-toggle-btn", function() {
+    $(this).closest(".jarviswidget").find(".content").toggleClass("hidden");
+    event.preventDefault();
+  });
 }
 
 function createInfoBox() {
@@ -121,3 +126,4 @@ function initSchoolInfoWindow() {
       content: ""
   })
 }
+
