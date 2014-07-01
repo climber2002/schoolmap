@@ -64,22 +64,30 @@
   ]
 
   var options = {
+      colors: ["#3DF46B", "#857FF0", "#EB8621"],
       series: {
           bars: {
               show: true,
               barWidth: 0.9,
-              align: "center"
+              align: "center",
+              numbers: { show: true },
+              fillColor: { colors: [ { opacity: 1 }, { opacity: 1 }, { opacity: 1 } ] }
           },
           stack: 0,
           lines: {show: false, steps: false }
       },
       xaxis: {
           minTickSize: 1,
+          reserveSpace: true,
+          alignTicksWithAxis: 1,
           ticks: [
             <%= Grade.all.order(:name).each_with_index.map do |grade, i| 
                 "[#{i + 1}, '#{grade.name}']"
               end.join(",").html_safe-%>
           ]
+      },
+      yaxis: {
+          minTickSize: 1
       },
       legend: {
         show: true,
