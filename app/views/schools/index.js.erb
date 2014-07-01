@@ -41,7 +41,7 @@
     <% Category.all.order(:name).each do |category| -%>
       {
         data: [
-          <%= Grade.all.order(:name).each_with_index.map do |grade, i| 
+          <%= Grade.all.each_with_index.map do |grade, i| 
             "[#{i + 1}, #{@school_count_stats[category.name][grade.name]}]"
           end.join(",").html_safe -%>
         ],
@@ -54,7 +54,7 @@
     <% Category.all.order(:name).each do |category| -%>
       {
         data: [
-          <%= Grade.all.order(:name).each_with_index.map do |grade, i| 
+          <%= Grade.all.each_with_index.map do |grade, i| 
             "[#{i + 1}, #{@capacity_stats[category.name][grade.name]}]"
           end.join(",").html_safe -%>
         ],
@@ -81,7 +81,7 @@
           reserveSpace: true,
           alignTicksWithAxis: 1,
           ticks: [
-            <%= Grade.all.order(:name).each_with_index.map do |grade, i| 
+            <%= Grade.all.each_with_index.map do |grade, i| 
                 "[#{i + 1}, '#{grade.name}']"
               end.join(",").html_safe-%>
           ]

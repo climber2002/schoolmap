@@ -70,7 +70,7 @@
                     }
                     var c = plot.p2c(point);
                     //Here - 32 is only for school statistics
-                    ctx.fillText(text.toString(10), c.left + offset.left - 32, c.top + offset.top)
+                    ctx.fillText(text.toString(10), c.left + offset.left - 32, c.top + offset.top - 8);
                 }
             }
         });
