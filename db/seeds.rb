@@ -52,13 +52,13 @@ end
 
 # Grade
 Grade.delete_all
-Grade.create!(name: 'maternelle', degree: 1)
-Grade.create!(name: 'primaire', degree: 1)
-Grade.create!(name: 'college', degree: 2)
-Grade.create!(name: 'lycee', degree: 2)
+Grade.create!(name: 'Maternelle', degree: 1)
+Grade.create!(name: 'Primaire', degree: 1)
+Grade.create!(name: 'College', degree: 2)
+Grade.create!(name: 'Lycee', degree: 2)
 
 # Category
 Category.delete_all
-Category.create!(name: 'publique')
-Category.create!(name: 'privee')
-Category.create!(name: 'confessionnelle')
+Category.create!(name: 'Religieux')
+Category.create!(name: 'Public')
+Category.create!(name: 'Privé')
