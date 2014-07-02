@@ -17,7 +17,7 @@ module SchoolsHelper
 
   # the info window content for school to display on google maps
   def info_window_content_for_school school
-    content_tag(:div, style: "width:300px; height:150px;") do
+    content_tag(:div, style: "width:300px; height:180px;") do
       content = ""
       content << content_tag(:h4, school.name)
       content << content_tag(:strong, "Grade: ")
@@ -30,10 +30,10 @@ module SchoolsHelper
       content << content_tag(:strong, "Address: ") << 
         escape_javascript("#{school.address} #{school.zipcode}") << "<br/>"
 
-      [:director, :website, :email, :phone_number].each do |attr|
+      [:director, :website, :email, :phone_number, :capacity].each do |attr|
         if school.read_attribute(attr).present?
           content << content_tag(:strong, "#{attr.to_s.humanize}: ") <<
-            escape_javascript(school.read_attribute(attr)) << "<br/>"
+            escape_javascript(school.read_attribute(attr).to_s) << "<br/>"
         end
       end
 
