@@ -11,4 +11,11 @@ class City < ActiveRecord::Base
   has_center  
 
   has_many :schools
+
+  # Select a random point from the city. This depends on the RandomPoint function
+  # in PostGIS
+  def self.random_point_in city
+    select('id, RandomPoint(geom) as random_point').where('id = ?', city.id).first.random_point
+  end
+
 end

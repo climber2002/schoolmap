@@ -1,25 +1,26 @@
-<form class="smartform">
-    <div class="form-group-container">
-      <header>Niveau d'enseignement</header>
-      <% Grade.all.each do |grade| -%>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox"> <%= grade.name -%>
-          </label>
-        </div>  
-      <% end -%>
-    </div>
+<%= form_tag(schools_path, method: :get, remote: true, class: 'smartform', id: 'search-schools') do -%>
+  <div class="form-group-container">
+    <header>Niveau d'enseignement</header>
+    <% Grade.all.each do |grade| -%>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" disabled="true"> <%= grade.name -%>
+        </label>
+      </div>  
+    <% end -%>
+  </div>
 
-    <div class="form-group-container">
-      <header>Ordre d'enseignement</header>
-      <% Category.all.each do |category| -%>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox"> <%= category.name -%>
-          </label>
-        </div>  
-      <% end -%>
-    </div>
+  <div class="form-group-container">
+    <header>Ordre d'enseignement</header>
+    <% Category.all.each do |category| -%>
+      <div class="checkbox">
+        <label>
+          <%= check_box_tag 'category_ids[]', category.id -%> <%= category.name -%>
+        </label>
+      </div>  
+    <% end -%>
+  </div>
 
-    <button type="submit" class="btn btn-primary btn-sm">Search</button>
-  </form>
+  <div id="custom-input"></div>
+  <%= submit_tag 'Afficher', class: "btn btn-primary btn-sm" -%>
+<% end -%>

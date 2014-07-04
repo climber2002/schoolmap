@@ -65,4 +65,5 @@ module SchoolsHelper
 
     "markers/markermed_#{color}_#{char}.png"
   end
+
 end

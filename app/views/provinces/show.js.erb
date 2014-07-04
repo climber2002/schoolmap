@@ -5,6 +5,9 @@
   <%# update breadcrumb -%>
   $("#ribbon").html("<%= escape_javascript(render partial: 'shared/breadcrumb') %>")
 
+  <%# update custom input -%>
+  $("#custom-input").html("<%= escape_javascript(render partial: 'shared/province_id_param') -%>")
+
   <%# Clear the original highlighted area %>
   currentAreaPolygon.setMap(null);
 
@@ -56,7 +59,7 @@
       cityId = event.feature.getProperty('id');
       console.log("click province id " + provinceId + " city id " + cityId);
       $.getScript("/provinces/" + provinceId + "/cities/" + cityId + ".js");
-      $.getScript("/cities/" + cityId + "/schools.js");
+      
     });    
 
     currentData.setStyle(function(feature) {
@@ -70,7 +73,7 @@
     map.set('zoom', 8);
 
     //load schools of the province
-    $.getScript("<%= province_schools_path(@province, format: :js) -%>")
+    $.getScript("/provinces/<%= @province.id -%>/schools.js?" + $("#search-schools").serialize());
 })();
 
 

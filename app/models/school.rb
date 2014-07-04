@@ -33,6 +33,7 @@ class School < ActiveRecord::Base
 
   scope :in_province, ->(province_id) { where('province_id = ?', province_id) }
   scope :in_city, ->(city_id) { where('city_id = ?', city_id) }
+  scope :in_categories, ->(category_ids) { where(category_id: category_ids) }
 
   private
   def set_province

@@ -38,6 +38,12 @@ gem 'annotate', group: :development
 
 gem 'font-awesome-sass'
 
+group :development do
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'pry-rails'
+end
+
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.0'
   gem 'factory_girl_rails', '~> 4.2.1'
@@ -51,8 +57,6 @@ group :test do
   gem 'launchy', '~> 2.3.0'
   gem 'selenium-webdriver', '~> 2.39.0'
 end
-
-gem 'pry-rails', :group => :development
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

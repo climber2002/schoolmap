@@ -12,7 +12,7 @@ describe SchoolsHelper do
   end
 
   context "marker_img_tag_for_grade" do 
-    let(:college_grade) { Grade.find_by(name: 'college') }
+    let(:college_grade) { Grade.find_by(name: 'College') }
     subject { marker_img_tag_for_grade(college_grade) }
 
     it "should has letter C for grade college" do

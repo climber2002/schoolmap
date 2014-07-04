@@ -1,7 +1,10 @@
 (function() {
 
   <%# update breadcrumb -%>
-  $("#ribbon").html("<%= escape_javascript(render partial: 'shared/breadcrumb') %>")
+  $("#ribbon").html("<%= escape_javascript(render partial: 'shared/breadcrumb') %>");
+
+  <%# reset custom input -%>
+  $("#custom-input").html("");
 
   if(currentAreaPolygon !== undefined) {
     currentAreaPolygon.setMap(null);
@@ -22,5 +25,5 @@
   map.set('zoom', 7);
 
   // Load all schools
-  $.getScript("<%= schools_path(format: :js) %>")
+  $.getScript("/schools.js?" + $("#search-schools").serialize());
  })();

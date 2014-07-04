@@ -5,6 +5,9 @@
   <%# update breadcrumb -%>
   $("#ribbon").html("<%= escape_javascript(render partial: 'shared/breadcrumb') %>")
 
+  <%# update custom input -%>
+  $("#custom-input").html("<%= escape_javascript(render partial: 'shared/city_id_param') -%>")
+
   <%# Clear the original highlighted area %>
   if(currentAreaPolygon !== undefined) {
     currentAreaPolygon.setMap(null);
@@ -43,4 +46,6 @@
   map.setCenter(center);
   map.set('zoom', 9);
 
+  <%# load schools of the city -%>
+  $.getScript("/cities/" + cityId + "/schools.js?" + $("#search-schools").serialize());
 })();

@@ -12,6 +12,6 @@ FactoryGirl.define do
     grade { Grade.all.sample }
     category { Category.all.sample }
     city { City.all.sample }
-    geom { City.select('RandomPoint(geom) as random_point').where('id = ?', city.id).first.random_point }
+    geom { City.random_point_in(city) }
   end
 end

@@ -18,6 +18,8 @@ class SchoolsController < ApplicationController
     @schools = School.all
     @schools = @schools.in_province(params[:province_id]) if params[:province_id]
     @schools = @schools.in_city(params[:city_id]) if params[:city_id]
+    puts "category_id: #{params[:category_ids]}" if params[:category_ids]
+    @schools = @schools.in_categories(params[:category_ids]) if params[:category_ids]
 
     set_school_stats
     
