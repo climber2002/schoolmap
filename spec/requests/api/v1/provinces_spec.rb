@@ -14,7 +14,9 @@ describe Api::V1::ProvincesController do
     end
 
     it "should have 9 provinces in the body" do
+
       json = JSON.parse(response.body)
+      puts JSON.pretty_generate(json)
       expect(json.size).to eq 9
     end
 
