@@ -12,10 +12,21 @@ Rails.application.routes.draw do
   end
 
   resources :cities do
-    resources :schools
+    resources :schools, only: [:index]
   end
 
-  resources :schools
+  resources :schools, only: [:create]
+
+  namespace :api do
+    namespace :v1 do
+      resources :provinces do
+        resources :cities
+      end
+
+      resources :schools, only: [:create]
+    end
+  end
+
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

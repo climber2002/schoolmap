@@ -1,18 +1,6 @@
 class SchoolsController < ApplicationController
 
-  def create
-    @school = School.new school_params
-
-    if @school.save
-      respond_to do |format|
-        format.json { render json: @school.as_json }
-      end
-    else
-      respond_to do |format|
-        format.json { render json: { error: @school.errors.as_json } }
-      end
-    end  
-  end
+  include SchoolsSupport
 
   def index
     @schools = School.all
@@ -28,13 +16,7 @@ class SchoolsController < ApplicationController
     end
   end
 
-  private 
-
-  def school_params
-    params.require(:school).permit(:name, :address, :zipcode, :director, :website, :phone_number,
-      :email, :geom, :city, :city_id, :city_name, :grade_id, :grade_name, :category_id, :category_name, 
-      :capacity)
-  end
+  private
 
   def set_school_stats
     # stats is a hash of hash, for the outer hash the key is the category name, and each category has a hash, 
