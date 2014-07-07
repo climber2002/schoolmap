@@ -13,8 +13,8 @@
     currentAreaPolygon.setMap(null);
   }
   <%# hide provinces data -%>
-  if(currentData !== undefined) {
-    currentData.setMap(null);
+  if($currentData !== undefined) {
+    $currentData.setMap(null);
   }
 
   <%# set highlighted area only to the selected province -%>
@@ -31,7 +31,6 @@
     cityArea.push(<%= polygon_to_gmap_points_array polygon -%>);
   <% end %>
 
-
   currentAreaPolygon = new google.maps.Polygon({
     paths: cityArea,
     strokeColor: "#000000",
@@ -40,12 +39,25 @@
     fillColor: "#ffffff",
     fillOpacity: 1
   });
-  currentAreaPolygon.setMap(map);
+  currentAreaPolygon.setMap($map);
+
+  <%# set currentData to the current city %>
+  $currentData = new google.maps.Data();
+  $currentAreaType = 'city';
+  $currentData.loadGeoJson("<%= province_city_path @province, @city, format: :json %>");
+  eventProcessor = $CONFIG['eventProcessor'];
+
+  $currentData.addListener('mouseover', eventProcessor.mouseover);
+
+  $currentData.addListener('mouseout', eventProcessor.mouseout);
+
+  $currentData.addListener('click', eventProcessor.click);
 
   var center = new google.maps.LatLng(<%= @city.center_point.y -%>, <%= @city.center_point.x -%>);
-  map.setCenter(center);
-  map.set('zoom', 9);
+  $map.setCenter(center);
+  $map.set('zoom', 9);
 
   <%# load schools of the city -%>
+  var cityId = <%= @city.id -%>;
   $.getScript("/cities/" + cityId + "/schools.js?" + $("#search-schools").serialize());
 })();

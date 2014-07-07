@@ -9,18 +9,22 @@ function setMainSize() {
   $("#main").height(totalHeight - $("#header").outerHeight() - $("#ribbon").outerHeight());
   $("#left-panel").height(totalHeight - $("#header").outerHeight());
 
-  if(map) {
-    google.maps.event.trigger(map, 'resize');  
+  if($map) {
+    google.maps.event.trigger($map, 'resize');  
   }
   
 }
 
 // This is the google map object and it's global
-var map;
+var $map;
 // This is the highlighted area, and the other area will be dark
 var currentAreaPolygon;
 // This is current data
-var currentData;
+var $currentData;
+// the current area type displayed on the map, should be country, province or city
+var $currentAreaType = 'country';
+
+var $currentStateProcessor;
 
 // This is a polygon represents gabon
 var gabonPolygon;
@@ -34,10 +38,17 @@ var schoolMarkers = [];
 // The infoWindow which displays school info
 var schoolInfowindow;
 
+var $CONFIG = {};
+
 $(document).ready(function() {
+  $currentStateProcessor = new NormalStateEventProcessor();
+  
+  initEventProcessor();
   setMainSize();
   initMap();
   initSchoolInfoWindow();
+
+
 
   $(window).resize(function() {
     setMainSize();
@@ -71,11 +82,11 @@ function initMap() {
   };
 
   var mapElement = document.getElementById('map');
-  map = new google.maps.Map(mapElement, mapOptions);
-  map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+  $map = new google.maps.Map(mapElement, mapOptions);
+  $map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
 
   // hide most features
-  map.set('styles', [
+  $map.set('styles', [
       {
         featureType: 'road.highway',
         stylers: [ { visibility: 'off' } ]
@@ -104,7 +115,7 @@ function initMap() {
 
   //Set center to garbon
   var gabon = new google.maps.LatLng(-0.6225172457730085, 11.785067468340143);
-  map.setCenter(gabon);
+  $map.setCenter(gabon);
 
   //Create an info box for displaying names
   createInfoBox();
@@ -118,7 +129,7 @@ function initMap() {
 function createInfoBox() {
   var infoBox = document.createElement('div');
   infoBox.innerHTML = "<div id='info-box'>Info</div>";
-  map.controls[google.maps.ControlPosition.TOP_RIGHT].push(infoBox);
+  $map.controls[google.maps.ControlPosition.TOP_RIGHT].push(infoBox);
 }
 
 function initSchoolInfoWindow() {
@@ -126,4 +137,9 @@ function initSchoolInfoWindow() {
       content: ""
   })
 }
+
+function initEventProcessor() {
+  $CONFIG['eventProcessor'] = new EventProcessor();
+}
+
 

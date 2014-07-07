@@ -15,12 +15,12 @@
       var marker = new google.maps.Marker({
                     position : new google.maps.LatLng(<%= school.geom.y %>, <%= school.geom.x %>),
                     icon: '<%= grade_marker_path_for_school(school) -%>',
-                    map: map
+                    map: $map
                   });
       schoolMarkers.push(marker);
       google.maps.event.addListener(marker, 'click', function() {
         schoolInfoWindow.content = '<%= info_window_content_for_school(school) -%>';
-        schoolInfoWindow.open(map, marker);
+        schoolInfoWindow.open($map, marker);
       });
     })();
   <% end %>
@@ -29,7 +29,7 @@
   if(! document.getElementById("grade-info")) {
     var gradeInfo = document.createElement('div');
     gradeInfo.innerHTML = '<%= escape_javascript(render("grade")) -%>';
-    var bottomLeft = map.controls[google.maps.ControlPosition.BOTTOM_LEFT];
+    var bottomLeft = $map.controls[google.maps.ControlPosition.BOTTOM_LEFT];
     while(bottomLeft.length > 0) {
       bottomLeft.pop();
     }

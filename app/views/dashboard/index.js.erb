@@ -10,19 +10,20 @@
     currentAreaPolygon.setMap(null);
   }
   currentAreaPolygon = gabonPolygon;
-  currentAreaPolygon.setMap(map);
+  currentAreaPolygon.setMap($map);
 
-  if(currentData !== undefined) {
-    currentData.setMap(null);
+  if($currentData !== undefined) {
+    $currentData.setMap(null);
   }
-  currentData = provincesData;
-  currentData.setMap(map);
+  $currentData = provincesData;
+  $currentData.setMap($map);
+  $currentAreaType = 'country';
   
   //Set center to garbon
   var gabon = new google.maps.LatLng(-0.6225172457730085, 11.785067468340143);
-  map.setCenter(gabon);
+  $map.setCenter(gabon);
 
-  map.set('zoom', 7);
+  $map.set('zoom', 7);
 
   // Load all schools
   $.getScript("/schools.js?" + $("#search-schools").serialize());
