@@ -16,6 +16,12 @@
     <div id="hide-menu" class="btn-header vcenter">
       <span> <a href="javascript:void(0);" title="Collapse Menu"><i class="fa fa-reorder fa-2x"></i></a> </span>
     </div>
+
+    <div class="pull-right">
+      <div id='add-school' class="btn-header vcenter">
+        <span><a href="javascript:void(0);" title="Add School"><i class="fa fa-plus-circle fa-2x"></i></a> </span>
+      </div>
+    </div>
   </header>
 
   <aside id="left-panel">
@@ -29,5 +35,7 @@
     <%= yield %>
   </div>
 
+
+  <%= render 'shared/add_school' -%>
 </body>
 </html>

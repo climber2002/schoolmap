@@ -13,11 +13,15 @@ EventProcessor.prototype = {
     $currentStateProcessor.mouseout(event);
   },
 
+  mousemove: function(event) {
+    $currentStateProcessor.mousemove(event);
+  },
+
   click: function(event) {
     $currentStateProcessor.click(event);
   }
 
-}
+};
 
 // This class is to process the feature events in normal state
 function NormalStateEventProcessor() {
@@ -40,6 +44,10 @@ NormalStateEventProcessor.prototype = {
     }
   },
 
+  mousemove: function(event) {
+    
+  },
+
   click: function(event) {
     if($currentAreaType === 'country') {
       $currentData.revertStyle();
@@ -52,6 +60,33 @@ NormalStateEventProcessor.prototype = {
       console.log("click province id " + provinceId + " city id " + cityId);
       $.getScript("/provinces/" + provinceId + "/cities/" + cityId + ".js");
     }
+  }
+
+};
+
+
+// This class is to process feature events when add a school
+function AddSchoolStateEventProcessor() {
+
+}
+
+AddSchoolStateEventProcessor.prototype = {
+
+  mouseover: function(event) {
+    $addSchoolMarker.setVisible(true);
+  },
+
+  mouseout: function(event) {
+    $addSchoolMarker.setVisible(false);
+  },
+
+  mousemove: function(event) {
+    var cursorPosition = event.latLng;
+    $addSchoolMarker.setPosition(cursorPosition);
+  },
+
+  click: function(event) {
+    $('#myModal').modal({});
   }
 
 }

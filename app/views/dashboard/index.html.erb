@@ -19,8 +19,33 @@ function initBarChartBox() {
   }
 }
 
+function changeToAddSchoolState() {
+  $('#add-school >:first-child > a').addClass('pressed');
+  $currentStateProcessor = new AddSchoolStateEventProcessor();
+  $addSchoolMarker.setMap($map);
+}
+
+function changeToNormalState() {
+  $('#add-school >:first-child > a').removeClass('pressed');
+  $currentStateProcessor = new NormalStateEventProcessor();
+  $addSchoolMarker.setMap(null);
+}
+
 $(document).ready(function(){
   initBarChartBox();
+
+  // Add School button
+  $('#add-school >:first-child > a').click(function(e) {
+    if($currentStateProcessor instanceof NormalStateEventProcessor) {
+      changeToAddSchoolState();
+    }else {
+      changeToNormalState();
+    }
+  });
+
+  $addSchoolMarker = new google.maps.Marker({
+                          icon: '<%= image_path("markers/marker.png") -%>'
+                        });
 
   if(gabonPolygon === undefined) {  
     //This is area of the whole world
@@ -65,6 +90,8 @@ $(document).ready(function(){
     provincesData.addListener('mouseover', eventProcessor.mouseover);
 
     provincesData.addListener('mouseout', eventProcessor.mouseout);
+
+    provincesData.addListener('mousemove', eventProcessor.mousemove);
 
     provincesData.addListener('click', eventProcessor.click);    
 

@@ -26,6 +26,9 @@ var $currentAreaType = 'country';
 
 var $currentStateProcessor;
 
+//the marker which acts as a cursor
+var $addSchoolMarker;
+
 // This is a polygon represents gabon
 var gabonPolygon;
 
@@ -42,7 +45,7 @@ var $CONFIG = {};
 
 $(document).ready(function() {
   $currentStateProcessor = new NormalStateEventProcessor();
-  
+
   initEventProcessor();
   setMainSize();
   initMap();
@@ -67,6 +70,7 @@ $(document).ready(function() {
     e.preventDefault();
 
   });
+
 
 });
 
