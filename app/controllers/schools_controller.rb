@@ -1,5 +1,7 @@
 class SchoolsController < ApplicationController
 
+  layout false
+
   include SchoolsSupport
 
   def index
@@ -14,6 +16,12 @@ class SchoolsController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+  def new
+    @geom = params[:geom]
+    @city = City.has_point(@geom).first
+    @school = School.new
   end
 
   private

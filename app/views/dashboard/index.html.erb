@@ -19,7 +19,7 @@ function initBarChartBox() {
   }
 }
 
-function changeToAddSchoolState() {
+function changeToEditState() {
   $('#add-school >:first-child > a').addClass('pressed');
   $currentStateProcessor = new AddSchoolStateEventProcessor();
   $addSchoolMarker.setMap($map);
@@ -31,13 +31,28 @@ function changeToNormalState() {
   $addSchoolMarker.setMap(null);
 }
 
+function getPointStringFromLatLng(latLng) {
+  var lat = latLng.lat();
+  var lng = latLng.lng();
+  return "POINT (" + lng.toString() + " " + lat.toString() + ")";
+}
+
+function initEventListenersForData(data) {
+  eventProcessor = $CONFIG['eventProcessor'];
+
+  data.addListener('mouseover', eventProcessor.mouseover);
+  data.addListener('mouseout', eventProcessor.mouseout);
+  data.addListener('mousemove', eventProcessor.mousemove);
+  data.addListener('click', eventProcessor.click);
+}
+
 $(document).ready(function(){
   initBarChartBox();
 
   // Add School button
   $('#add-school >:first-child > a').click(function(e) {
     if($currentStateProcessor instanceof NormalStateEventProcessor) {
-      changeToAddSchoolState();
+      changeToEditState();
     }else {
       changeToNormalState();
     }
@@ -83,17 +98,11 @@ $(document).ready(function(){
               strokeWeight: 1};
     });
     
-    eventProcessor = $CONFIG['eventProcessor'];
+    
     $currentData = provincesData;
     $currentAreaType = 'country';
 
-    provincesData.addListener('mouseover', eventProcessor.mouseover);
-
-    provincesData.addListener('mouseout', eventProcessor.mouseout);
-
-    provincesData.addListener('mousemove', eventProcessor.mousemove);
-
-    provincesData.addListener('click', eventProcessor.click);    
+    initEventListenersForData($currentData);    
 
     
   }

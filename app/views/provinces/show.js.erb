@@ -44,13 +44,8 @@
     $currentData = new google.maps.Data();
     $currentAreaType = 'province';
     $currentData.loadGeoJson("<%= province_cities_path @province, format: :json %>");
-    eventProcessor = $CONFIG['eventProcessor'];
-
-    $currentData.addListener('mouseover', eventProcessor.mouseover);
-
-    $currentData.addListener('mouseout', eventProcessor.mouseout);
-
-    $currentData.addListener('click', eventProcessor.click);    
+    
+    initEventListenersForData($currentData);   
 
     $currentData.setStyle(function(feature) {
       return { fillColor: 'green',

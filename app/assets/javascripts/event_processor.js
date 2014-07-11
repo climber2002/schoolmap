@@ -86,6 +86,16 @@ AddSchoolStateEventProcessor.prototype = {
   },
 
   click: function(event) {
+    var cursorPosition = event.latLng;
+    var geom = getPointStringFromLatLng(cursorPosition);
+    alert(geom);
+
+    var target = '/schools/new?geom=' + encodeURIComponent(geom);
+
+    // load the url and show modal on success
+    $("#myModal .modal-content").load(target,  function() { 
+         $("#myModal").modal("show"); 
+    });
     $('#myModal').modal({});
   }
 
