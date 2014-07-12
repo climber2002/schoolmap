@@ -37,7 +37,7 @@ class School < ActiveRecord::Base
 
   private
   def set_province
-    self.province = self.city.province unless self.province
+    self.province = self.city.province if self.city && (!self.province)
   end
 
 end

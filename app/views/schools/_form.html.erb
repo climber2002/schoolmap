@@ -1,0 +1,100 @@
+<%# This will be injected into the modal's modal-content -%>
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <h4 class="modal-title" id="myModalLabel">Add new school</h4>
+</div>
+
+<%= form_for @school, remote: true, html: { class: 'form-horizontal', role: 'form' } do |f| -%>
+  <div class="modal-body">
+    
+    <div class="form-group<%= @school.errors[:name].empty? ? '' : ' error' %>">
+      <%= f.label :name, 'Name', class: 'control-label col-sm-2' -%>
+      <div class="controls col-sm-8">
+        <%= f.text_field :name, class: 'form-control' %>
+        <% @school.errors[:name].each do |error| -%>
+          <span class="help-inline"><%= error -%></span>
+        <% end -%>
+      </div>  
+    </div>
+
+    <div class="form-group">
+      <%= f.label :grade_id, 'Grade', class: 'control-label col-sm-2' -%>
+      <div class="controls col-sm-3">
+        <%= f.select(:grade_id, Grade.all.map { |grade| [grade.name, grade.id] }, {}, class: 'form-control') -%>
+      </div>
+
+      <%= f.label :category_id, 'Category', class: 'control-label col-sm-2' -%>
+      <div class="controls col-sm-3">
+        <%= f.select(:category_id, Category.all.map { |category| [category.name, category.id] }, {}, class: 'form-control') -%>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :province, 'Province', class: 'control-label col-sm-2' -%>
+      <div class="controls col-sm-2">
+        <%= text_field_tag 'province', @school.city.province.name, disabled: true, class: 'form-control' -%>
+      </div>
+      <%= f.label :city, 'City', class: 'control-label col-sm-2' -%>
+      <div class="col-sm-4">
+        <%= text_field_tag 'city', @school.city.name, disabled: true, class: 'form-control' -%>
+        <%= f.hidden_field :city_id %>
+        <%= f.hidden_field :geom -%>
+      </div>
+    </div>
+
+    <div class="form-group<%= @school.errors[:address].empty? ? '' : ' error' %>">
+      <%= f.label :address, 'Address', class: 'control-label col-sm-2' -%>
+      <div class="controls col-sm-10">
+        <%= f.text_field :address, class: 'form-control' %>
+        <% @school.errors[:address].each do |error| -%>
+          <span class="help-inline"><%= error -%></span>
+        <% end -%>
+      </div>
+    </div>
+    
+    <div class="form-group<%= @school.errors[:zipcode].empty? ? '' : ' error' %>">
+      <%= f.label :zipcode, 'Zipcode', class: 'control-label col-sm-2' -%>
+      <div class="controls col-sm-2">
+        <%= f.text_field :zipcode, class: 'form-control' %>
+        <% @school.errors[:zipcode].each do |error| -%>
+          <span class="help-inline"><%= error -%></span>
+        <% end -%>
+      </div>
+    </div> 
+
+    <div class="form-group">
+      <%= f.label :website, 'Website', class: 'control-label col-sm-2' -%>
+      <div class="controls col-sm-4">
+        <%= f.text_field :website, class: 'form-control' %>
+      </div>
+      <%= f.label :email, 'Email', class: 'control-label col-sm-2' -%>
+      <div class="controls col-sm-4">
+        <%= f.text_field :email, class: 'form-control' %>
+      </div>
+    </div>   
+
+    <div class="form-group">
+      <%= f.label :director, 'Director', class: 'control-label col-sm-2' -%>
+      <div class="controls col-sm-4">
+        <%= f.text_field :director, class: 'form-control' %>
+      </div>
+      <%= f.label :phone_number, 'Phone Number', class: 'control-label col-sm-2' -%>
+      <div class="controls col-sm-4">
+        <%= f.text_field :phone_number, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :capacity, 'Capacity', class: 'control-label col-sm-2' -%>
+      <div class="controls col-sm-2">
+        <%= f.text_field :capacity, class: 'form-control' %>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <%= f.submit 'Save changes', class: 'btn btn-primary' -%>
+  </div>
+
+<% end -%>

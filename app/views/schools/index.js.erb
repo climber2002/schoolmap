@@ -1,12 +1,12 @@
 (function() {
   var marker;
 
-  if(schoolMarkers.length > 0) {
-    for(i = 0; i < schoolMarkers.length; i++) {
-      marker = schoolMarkers[i];
+  if($schoolMarkers.length > 0) {
+    for(i = 0; i < $schoolMarkers.length; i++) {
+      marker = $schoolMarkers[i];
       marker.setMap(null);
     }
-    schoolMarkers = [];
+    $schoolMarkers = [];
   }
 
   <%# add schools as markers on google map %>
@@ -17,7 +17,7 @@
                     icon: '<%= grade_marker_path_for_school(school) -%>',
                     map: $map
                   });
-      schoolMarkers.push(marker);
+      $schoolMarkers.push(marker);
       google.maps.event.addListener(marker, 'click', function() {
         schoolInfoWindow.content = '<%= info_window_content_for_school(school) -%>';
         schoolInfoWindow.open($map, marker);

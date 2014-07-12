@@ -1,0 +1,24 @@
+<% if @school.persisted? -%>
+
+  $('#myModal').modal('hide');
+
+  var marker = new google.maps.Marker({
+                    position : new google.maps.LatLng(<%= @school.geom.y %>, <%= @school.geom.x %>),
+                    icon: '<%= grade_marker_path_for_school(@school) -%>',
+                    map: $map
+                  });
+  $schoolMarkers.push(marker);
+  google.maps.event.addListener(marker, 'click', function() {
+    schoolInfoWindow.content = '<%= info_window_content_for_school(@school) -%>';
+    schoolInfoWindow.open($map, marker);
+  });
+
+  marker.setAnimation(google.maps.Animation.BOUNCE);
+  setTimeout(function () {
+      marker.setAnimation(null);
+    }, 2000);
+  
+  changeToNormalState();
+<% else -%>
+  $('#myModal .modal-content').html("<%= escape_javascript(render partial: 'form') -%>")
+<% end -%>

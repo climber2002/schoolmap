@@ -88,7 +88,6 @@ AddSchoolStateEventProcessor.prototype = {
   click: function(event) {
     var cursorPosition = event.latLng;
     var geom = getPointStringFromLatLng(cursorPosition);
-    alert(geom);
 
     var target = '/schools/new?geom=' + encodeURIComponent(geom);
 

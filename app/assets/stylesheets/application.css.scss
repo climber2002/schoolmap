@@ -164,6 +164,10 @@ body {
   
 }
 
+span.control-field {
+  padding-top: 7px;
+}
+
 /*
  * HIDDEN MENU
  */
@@ -224,4 +228,14 @@ body {
 /* font awesome */
 .pressed {
   color: orange;
+}
+
+/* error */
+.form-group.error label, .form-group.error .help-block, .form-group.error .help-inline {
+  color: #b94a48;
+}
+
+.form-group.error .checkbox, .form-group.error .radio, .form-group.error input, .form-group.error select, .form-group.error textarea {
+  color: #bd4247;
+  border-color: #bd4247;
 }
