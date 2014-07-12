@@ -13,14 +13,54 @@ function initBarChartBox() {
     barChart.style.width = "330px";
 
     barChart.innerHTML = '<%= escape_javascript(render("schools/bar_chart")) -%>';
-    var bottomRight = map.controls[google.maps.ControlPosition.RIGHT_BOTTOM];
+    var bottomRight = $map.controls[google.maps.ControlPosition.RIGHT_BOTTOM];
     bottomRight.push(barChart);
     
   }
 }
 
+function changeToEditState() {
+  $('#add-school >:first-child > a').addClass('pressed');
+  $currentStateProcessor = new AddSchoolStateEventProcessor();
+  $addSchoolMarker.setMap($map);
+}
+
+function changeToNormalState() {
+  $('#add-school >:first-child > a').removeClass('pressed');
+  $currentStateProcessor = new NormalStateEventProcessor();
+  $addSchoolMarker.setMap(null);
+}
+
+function getPointStringFromLatLng(latLng) {
+  var lat = latLng.lat();
+  var lng = latLng.lng();
+  return "POINT (" + lng.toString() + " " + lat.toString() + ")";
+}
+
+function initEventListenersForData(data) {
+  eventProcessor = $CONFIG['eventProcessor'];
+
+  data.addListener('mouseover', eventProcessor.mouseover);
+  data.addListener('mouseout', eventProcessor.mouseout);
+  data.addListener('mousemove', eventProcessor.mousemove);
+  data.addListener('click', eventProcessor.click);
+}
+
 $(document).ready(function(){
   initBarChartBox();
+
+  // Add School button
+  $('#add-school >:first-child > a').click(function(e) {
+    if($currentStateProcessor instanceof NormalStateEventProcessor) {
+      changeToEditState();
+    }else {
+      changeToNormalState();
+    }
+  });
+
+  $addSchoolMarker = new google.maps.Marker({
+                          icon: '<%= image_path("markers/marker.png") -%>'
+                        });
 
   if(gabonPolygon === undefined) {  
     //This is area of the whole world
@@ -50,29 +90,21 @@ $(document).ready(function(){
   //Load GeoJSON of provinces
   if(provincesData === undefined) {
     provincesData = new google.maps.Data();
+    $currentData = provincesData;
     provincesData.loadGeoJson("<%= provinces_path format: :json %>");
-    
-    provincesData.addListener('mouseover', function(event) {
-      provincesData.revertStyle();
-      $('#info-box').text(event.feature.getProperty('name'));
-      provincesData.overrideStyle(event.feature, { fillColor: 'red' });
-    });
-
-    provincesData.addListener('mouseout', function(event){
-      provincesData.revertStyle();
-    });
-
-    provincesData.addListener('click', function(event) {
-      provinceId = event.feature.getProperty('id');
-      console.log("click province id " + provinceId);
-      $.getScript("/provinces/" + provinceId + ".js");
-      $.getScript("/provinces/" + provinceId + '/schools.js');
-    });    
 
     provincesData.setStyle(function(feature) {
       return { fillColor: 'green',
               strokeWeight: 1};
     });
+    
+    
+    $currentData = provincesData;
+    $currentAreaType = 'country';
+
+    initEventListenersForData($currentData);    
+
+    
   }
 
   var _elementToFind = "bar-chart";

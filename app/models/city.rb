@@ -18,4 +18,6 @@ class City < ActiveRecord::Base
     select('id, RandomPoint(geom) as random_point').where('id = ?', city.id).first.random_point
   end
 
+  scope :has_point, ->(point) { where("ST_Contains(geom, ST_GeomFromText('#{point.to_s}', 4326))") }
+
 end

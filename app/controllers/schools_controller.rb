@@ -1,5 +1,7 @@
 class SchoolsController < ApplicationController
 
+  layout false
+
   include SchoolsSupport
 
   def index
@@ -14,6 +16,28 @@ class SchoolsController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+  def new
+    @geom = params[:geom]
+    @city = City.has_point(@geom).first
+    @school = School.new(geom: @geom, city: @city)
+  end
+
+  def create
+    @school = School.new school_params
+
+    if @school.save
+      respond_to do |format|
+        format.json { render json: @school.as_json }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { error: @school.errors.as_json } }
+        format.js
+      end
+    end  
   end
 
   private

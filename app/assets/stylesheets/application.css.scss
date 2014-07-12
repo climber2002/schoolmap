@@ -15,7 +15,8 @@
  *= require font-awesome
  */
 
-@import 'bootstrap';
+@import "bootstrap-sprockets";
+@import "bootstrap";
 
 /* body */
 body {
@@ -130,8 +131,11 @@ body {
 
       input {
         margin: 1px 2px;
-        vertical-align: middle;
-               
+        vertical-align: middle;    
+      }
+
+      span {
+        margin-left: 15px;
       }
     }
   }
@@ -158,6 +162,10 @@ body {
     }
   }
   
+}
+
+span.control-field {
+  padding-top: 7px;
 }
 
 /*
@@ -214,4 +222,20 @@ body {
   .legendLabel {
     padding: 0px 5px 0px 0px;
   }
+}
+
+
+/* font awesome */
+.pressed {
+  color: orange;
+}
+
+/* error */
+.form-group.error label, .form-group.error .help-block, .form-group.error .help-inline {
+  color: #b94a48;
+}
+
+.form-group.error .checkbox, .form-group.error .radio, .form-group.error input, .form-group.error select, .form-group.error textarea {
+  color: #bd4247;
+  border-color: #bd4247;
 }

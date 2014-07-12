@@ -20,8 +20,8 @@
   ];
 
   <%# hide provinces data -%>
-  if(currentData !== undefined) {
-    currentData.setMap(null);
+  if($currentData !== undefined) {
+    $currentData.setMap(null);
   }
 
   var provinceArea = [wholeWorld];
@@ -39,38 +39,23 @@
     fillColor: "#ffffff",
     fillOpacity: 1
   });
-  currentAreaPolygon.setMap(map);
+  currentAreaPolygon.setMap($map);
 
-    currentData = new google.maps.Data();
-    currentData.loadGeoJson("<%= province_cities_path @province, format: :json %>");
+    $currentData = new google.maps.Data();
+    $currentAreaType = 'province';
+    $currentData.loadGeoJson("<%= province_cities_path @province, format: :json %>");
     
-    currentData.addListener('mouseover', function(event) {
-      currentData.revertStyle();
-      $('#info-box').text(event.feature.getProperty('name'));
-      currentData.overrideStyle(event.feature, { fillColor: 'red' });
-    });
+    initEventListenersForData($currentData);   
 
-    currentData.addListener('mouseout', function(event){
-      currentData.revertStyle();
-    });
-
-    currentData.addListener('click', function(event) {
-      provinceId = event.feature.getProperty('province_id');
-      cityId = event.feature.getProperty('id');
-      console.log("click province id " + provinceId + " city id " + cityId);
-      $.getScript("/provinces/" + provinceId + "/cities/" + cityId + ".js");
-      
-    });    
-
-    currentData.setStyle(function(feature) {
+    $currentData.setStyle(function(feature) {
       return { fillColor: 'green',
               strokeWeight: 1};
     });
-    currentData.setMap(map);
+    $currentData.setMap($map);
 
     var center = new google.maps.LatLng(<%= @province.center_point.y -%>, <%= @province.center_point.x -%>);
-    map.setCenter(center);
-    map.set('zoom', 8);
+    $map.setCenter(center);
+    $map.set('zoom', 8);
 
     //load schools of the province
     $.getScript("/provinces/<%= @province.id -%>/schools.js?" + $("#search-schools").serialize());

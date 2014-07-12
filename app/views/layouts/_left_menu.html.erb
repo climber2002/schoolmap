@@ -4,7 +4,7 @@
     <% Grade.all.each do |grade| -%>
       <div class="checkbox">
         <label>
-          <input type="checkbox" disabled="true"> <%= grade.name -%>
+          <input type="checkbox" disabled="true"> <span><%= grade.name -%></span>
         </label>
       </div>  
     <% end -%>
@@ -15,7 +15,7 @@
     <% Category.all.each do |category| -%>
       <div class="checkbox">
         <label>
-          <%= check_box_tag 'category_ids[]', category.id -%> <%= category.name -%>
+          <%= check_box_tag 'category_ids[]', category.id -%> <span><%= category.name -%></span>
         </label>
       </div>  
     <% end -%>
