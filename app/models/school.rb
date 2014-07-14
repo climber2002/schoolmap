@@ -19,6 +19,8 @@ class School < ActiveRecord::Base
 
   before_validation :set_province
 
+  validate :geom_should_be_in_city
+
   def grade_name=(grade_name)
     self.grade = Grade.find_by(name: grade_name)
   end
@@ -38,6 +40,12 @@ class School < ActiveRecord::Base
   private
   def set_province
     self.province = self.city.province if self.city && (!self.province)
+  end
+
+  def geom_should_be_in_city
+    unless city.geom.contains?(geom)
+      errors.add(:city, 'location is not in city')
+    end
   end
 
 end
