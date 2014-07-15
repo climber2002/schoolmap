@@ -1,0 +1,26 @@
+<% if @school.valid? -%>
+  (function() {    
+
+    //Hide modal
+    $('#myModal').modal('hide');
+
+    var i;
+
+    for(i = 0; i < $schoolMarkers.length; i++) {
+      if($schoolMarkers[i].school_id === <%= @school.id -%>) {
+        var marker = $schoolMarkers[i];
+        google.maps.event.clearListeners(marker, 'click');
+
+        google.maps.event.addListener(marker, 'click', function() {
+          schoolInfoWindow.content = '<%= info_window_content_for_school(@school) -%>';
+          schoolInfoWindow.open($map, marker);
+        });
+
+        google.maps.event.trigger(marker, 'click');
+      }
+    }
+
+  }());  
+<% else -%>
+  $('#myModal .modal-content').html("<%= escape_javascript(render partial: 'edit') -%>")
+<% end -%>

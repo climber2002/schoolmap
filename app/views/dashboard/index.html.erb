@@ -46,7 +46,27 @@ function initEventListenersForData(data) {
   data.addListener('click', eventProcessor.click);
 }
 
+function configEditSchoolLink() {
+  $(document).on('click', 'a.edit-school', function(event) {
+    showModal($(this).attr('href'));
+    event.preventDefault();
+  });
+}
+
+/**
+* Using an Ajax to get the content of the targetUrl and populate the 
+* response as the modal's content and then show the modal
+**/
+function showModal(targetUrl) {
+  // load the url and show modal on success
+  $("#myModal .modal-content").load(targetUrl,  function() { 
+       $("#myModal").modal("show"); 
+  });
+  $('#myModal').modal({});
+}
+
 $(document).ready(function(){
+  configEditSchoolLink();
   initBarChartBox();
 
   // Add School button

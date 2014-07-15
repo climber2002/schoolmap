@@ -1,5 +1,7 @@
 class SchoolsController < ApplicationController
 
+  include ActionView::Helpers::JavaScriptHelper
+
   layout false
 
   include SchoolsSupport
@@ -38,6 +40,15 @@ class SchoolsController < ApplicationController
         format.js
       end
     end  
+  end
+
+  def edit
+    @school = School.find params[:id]
+  end
+
+  def update
+    @school = School.find params[:id]
+    @school.update_attributes(school_params)
   end
 
   private

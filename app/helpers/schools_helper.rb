@@ -17,7 +17,7 @@ module SchoolsHelper
 
   # the info window content for school to display on google maps
   def info_window_content_for_school school
-    content_tag(:div, style: "width:300px; height:180px;") do
+    content_tag(:div, style: "width:300px; height:230px;") do
       content = ""
       content << content_tag(:h4, school.name)
       content << content_tag(:strong, "Grade: ")
@@ -36,6 +36,9 @@ module SchoolsHelper
             escape_javascript(school.read_attribute(attr).to_s) << "<br/>"
         end
       end
+
+      content << "<br/>"
+      content << "#{link_to 'Edit', edit_school_path(school), remote: true, class: 'btn btn-primary edit-school'}"
 
       content.html_safe
     end

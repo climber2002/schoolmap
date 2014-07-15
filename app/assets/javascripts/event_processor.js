@@ -91,11 +91,7 @@ AddSchoolStateEventProcessor.prototype = {
 
     var target = '/schools/new?geom=' + encodeURIComponent(geom);
 
-    // load the url and show modal on success
-    $("#myModal .modal-content").load(target,  function() { 
-         $("#myModal").modal("show"); 
-    });
-    $('#myModal').modal({});
+    showModal(target);
   }
 
 }

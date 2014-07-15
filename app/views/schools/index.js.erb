@@ -17,6 +17,7 @@
                     icon: '<%= grade_marker_path_for_school(school) -%>',
                     map: $map
                   });
+      marker.school_id = <%= school.id -%>;
       $schoolMarkers.push(marker);
       google.maps.event.addListener(marker, 'click', function() {
         schoolInfoWindow.content = '<%= info_window_content_for_school(school) -%>';
