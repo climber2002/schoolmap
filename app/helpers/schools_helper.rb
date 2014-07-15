@@ -41,6 +41,15 @@ module SchoolsHelper
     end
   end
 
+  def total_schools(schools)
+    number_with_delimiter(schools.count, delimiter: " ")
+  end
+
+  def total_capacity(schools)
+    total = schools.inject(0) { |total_capacity, school| total_capacity += school.capacity }
+    number_with_delimiter(total, delimiter: " ")
+  end
+
   private 
 
   # Return the img logic path of the marker for the specific grade

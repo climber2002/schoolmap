@@ -27,4 +27,19 @@ describe SchoolsHelper do
       expect(subject).to include("images")
     end
   end
+
+  describe "#total_capacity" do 
+    let!(:school1) { FactoryGirl.create(:school, capacity: 5000) }
+    let!(:school2) { FactoryGirl.create(:school, capacity: 10000) }
+    let(:all_schools) { School.all }
+    subject { total_capacity(all_schools) }
+
+    it "should have two schools" do
+      expect(all_schools.count).to eq 2
+    end
+
+    it "should format correctly" do
+      expect(subject).to eq("15 000")
+    end
+  end
 end

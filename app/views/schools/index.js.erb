@@ -99,4 +99,6 @@
   $.plot("#schools-count-canvas", schoolCountSeries, options);
   $.plot("#capacity-canvas", capacitySeries, options);
 
+  $("#total-schools").text("<%= total_schools(@schools) -%>")
+  $("#total-capacity").text("<%= total_capacity(@schools) -%>")
 })();

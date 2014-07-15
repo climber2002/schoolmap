@@ -13,5 +13,6 @@ FactoryGirl.define do
     category { Category.all.sample }
     city { City.all.sample }
     geom { City.random_point_in(city) }
+    capacity { rand(1000) }
   end
 end
