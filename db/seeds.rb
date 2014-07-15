@@ -61,4 +61,4 @@ Grade.create!(name: 'Lycee', degree: 2)
 Category.delete_all
 Category.create!(name: 'Religieux')
 Category.create!(name: 'Public')
-Category.create!(name: 'Privé')
+Category.create!(name: 'Prive')
