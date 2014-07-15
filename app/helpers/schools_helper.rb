@@ -17,7 +17,7 @@ module SchoolsHelper
 
   # the info window content for school to display on google maps
   def info_window_content_for_school school
-    content_tag(:div, style: "width:300px; height:230px;") do
+    content_tag(:div, style: "width:350px; height:230px;") do
       content = ""
       content << content_tag(:h4, school.name)
       content << content_tag(:strong, "Grade: ")
