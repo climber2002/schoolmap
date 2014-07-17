@@ -9,7 +9,7 @@ module Api
       def create
         @school = School.new school_params
         
-        set_geom_in_city
+        # set_geom_in_city
 
         if @school.save
           respond_to do |format|

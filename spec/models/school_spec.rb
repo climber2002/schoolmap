@@ -35,7 +35,7 @@ describe School do
   describe "#in_categories" do
     let(:category_religieux) { Category.find_by(name: 'Religieux') }
     let(:category_public) { Category.find_by(name: 'Public') }
-    let(:category_prive) { Category.find_by(name: 'Privé')}
+    let(:category_prive) { Category.find_by(name: 'Prive')}
     let!(:school_public ) { FactoryGirl.create(:school, category: category_public) }
     let!(:school_religieux) { FactoryGirl.create(:school, category: category_religieux) }
     let!(:school_prive) { FactoryGirl.create(:school, category: category_prive) }
