@@ -40,6 +40,8 @@ gem 'annotate', group: :development
 
 gem 'font-awesome-sass'
 
+gem "rails-settings-cached", "0.4.1"
+
 group :development do
   gem 'guard'
   gem 'guard-rspec'

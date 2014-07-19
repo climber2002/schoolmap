@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Api::V1::SchoolsController do
   
-  context "#create" do
+  describe "#create" do
     let(:url) { "/api/v1/schools.json" }
 
     let(:school_attrs) do 
@@ -14,19 +14,38 @@ describe Api::V1::SchoolsController do
       { school: attrs }
     end
 
-    before :each do
-      post url, school_attrs.as_json
+    context "without random school" do
+      before :each do
+        post url, school_attrs.as_json
+      end
+
+      it "should return successful response" do
+        expect(response).to be_success
+      end
+
+      it "should be able to create a valid school" do
+        json = JSON.parse(response.body)
+        expect(json['name']).to eq 'A school name'
+      end
     end
 
-    it "should return successful response" do
-      expect(response).to be_success
+    context "with random school" do
+
+      before :each do
+        Setting.random_school = true
+        post url, school_attrs.as_json
+      end
+
+      it "should random school location if setting is set" do
+        puts "origin: #{school_attrs}"
+        puts "body: #{response.body}"
+        origin_geom = school_attrs[:school][:geom]
+        json = JSON.parse(response.body)
+        expect(json['geom']).not_to eq origin_geom
+      end
+
     end
 
-    it "should be able to create a valid school" do
-      puts "body: #{response.body}"
-      json = JSON.parse(response.body)
-      expect(json['name']).to eq 'A school name'
-    end
   end
 
   def swap_latlng point

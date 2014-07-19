@@ -10,7 +10,7 @@ module Api
         swap_latlng
         @school = School.new school_params
         
-        # set_geom_in_city
+        set_geom_in_city if Setting.random_school
 
         if @school.save
           respond_to do |format|

@@ -21,6 +21,15 @@
       <div id='add-school' class="btn-header vcenter">
         <span><a href="javascript:void(0);" title="Add School"><i class="fa fa-plus-circle fa-2x"></i></a> </span>
       </div>
+      &nbsp;
+      <div id='random-school' class="btn-header vcenter">
+        <span>
+          <%= link_to '/settings/toggle_random_school', remote: true, format: :js, method: :post, title: "Random School Location" do -%>
+            <i class="fa fa-random fa-2x"></i>
+          <% end -%>
+        </span>
+
+      </div>
     </div>
   </header>
 

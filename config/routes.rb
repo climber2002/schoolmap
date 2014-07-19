@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     end
   end
 
+  post 'settings/toggle_random_school' => 'settings#toggle_random_school'
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

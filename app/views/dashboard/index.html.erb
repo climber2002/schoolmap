@@ -69,6 +69,11 @@ $(document).ready(function(){
   configEditSchoolLink();
   initBarChartBox();
 
+  // Add pressed to random school if it's set in setting
+  <% if Setting.random_school -%>
+    $('#random-school >:first-child > a').addClass('pressed');
+  <% end -%>
+
   // Add School button
   $('#add-school >:first-child > a').click(function(e) {
     if($currentStateProcessor instanceof NormalStateEventProcessor) {
