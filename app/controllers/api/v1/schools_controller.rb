@@ -7,6 +7,7 @@ module Api
       include SchoolsSupport
 
       def create
+        swap_latlng
         @school = School.new school_params
         
         # set_geom_in_city
@@ -28,6 +29,12 @@ module Api
       def set_geom_in_city
         point = City.random_point_in(@school.city)
         @school.geom = point
+      end
+
+      def swap_latlng
+        if params[:school][:geom]
+          params[:school][:geom].sub!(/\((\d+\.\d+) (\d+.\d+)\)/) { "(#{$2} #{$1})" }
+        end
       end
 
     end

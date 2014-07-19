@@ -8,7 +8,7 @@ describe Api::V1::SchoolsController do
     let(:school_attrs) do 
       attrs = { name: "A school name", city_name: City.first.name, 
         grade_name: Grade.first.name, category_name: Category.first.name,
-        address: "a street", geom: City.first.center, zipcode: '5000', 
+        address: "a street", geom: swap_latlng(City.first.center), zipcode: '5000', 
         director: 'director', email: 'aaa@example.com', website: 'www.aaa.com' }
 
       { school: attrs }
@@ -27,5 +27,9 @@ describe Api::V1::SchoolsController do
       json = JSON.parse(response.body)
       expect(json['name']).to eq 'A school name'
     end
+  end
+
+  def swap_latlng point
+    point.to_s.sub!(/\((\d+\.\d+) (\d+.\d+)\)/) { "(#{$2} #{$1})" }
   end
 end
